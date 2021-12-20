@@ -65,12 +65,12 @@ class ImzMLFormat(AbstractFormat):
     @classmethod
     def is_spatial(cls) -> str:
         # ImzML should be used for conversion only
-        return False
+        return True
 
     @classmethod
     def is_spectral(cls) -> str:
         # ImzML should be used for conversion only
-        return False
+        return False  # TODO
 
     @classmethod
     def get_remarks(cls) -> str:
