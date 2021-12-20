@@ -10,7 +10,7 @@ import pyimzml.ImzMLParser
 from pims.formats.utils.abstract import AbstractFormat
 from pims.formats.utils.parser import AbstractParser
 from pims.formats.utils.structures.metadata import ImageChannel, ImageMetadata, MetadataStore
-
+from pims_plugin_format_msi.utils.imzml.utils import get_imzml_pair
 
 _REMOVE_WARNINGS = False
 
@@ -31,8 +31,10 @@ class ImzMLParser(AbstractParser):
                 warnings.filterwarnings('ignore', message=r'.*Accession IMS.*')
                 warnings.filterwarnings('ignore', message=r'.*Accession MS.*')
 
+            imz_path, _ = get_imzml_pair(self.format.path)
+
             self._parser = pyimzml.ImzMLParser.ImzMLParser(
-                self.format.path,
+                str(imz_path),
                 parse_lib='lxml',  # only "safe" XML parsing library available
                 # the parser doesn't need the ibd information (yet)
                 ibd_file=None,
