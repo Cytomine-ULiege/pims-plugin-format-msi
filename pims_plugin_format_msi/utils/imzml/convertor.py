@@ -12,6 +12,7 @@ import zarr
 from pyimzml.ImzMLParser import ImzMLParser as PyImzMLParser
 
 from pims.formats import AbstractFormat
+from pims.formats.common.zarr import ZarrFormat
 from pims.formats.utils.convertor import AbstractConvertor
 from pims_plugin_format_msi.__version__ import VERSION
 from pims_plugin_format_msi.utils.temp_store import single_temp_store
@@ -26,8 +27,9 @@ _DISK_COPY_THRESHOLD = 8 * 10 ** 9
 SHAPE = Tuple[int, int, int, int]
 
 
-class PIMSOpenMicroscopyEnvironmentZarr(AbstractFormat):
-    "placeholder while PIMS lack the internal Zarr format"
+# class PIMSOpenMicroscopyEnvironmentZarr(AbstractFormat):
+#     "placeholder while PIMS lack the internal Zarr format"
+PIMSOpenMicroscopyEnvironmentZarr = ZarrFormat
 
 
 @contextlib.contextmanager
