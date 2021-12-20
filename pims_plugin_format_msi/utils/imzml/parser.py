@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import warnings
-import numpy as np
 
+import numpy as np
 import pyimzml.ImzMLParser
+
 from pims.formats.utils.abstract import AbstractFormat
 from pims.formats.utils.parser import AbstractParser
 from pims.formats.utils.structures.metadata import ImageChannel, ImageMetadata, MetadataStore
