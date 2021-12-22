@@ -22,6 +22,7 @@ from pims.formats import AbstractFormat
 from pims_plugin_format_msi.utils.imzml.checker import ImzMLChecker
 from pims_plugin_format_msi.utils.imzml.convertor import ImzMLToZarrConvertor
 from pims_plugin_format_msi.utils.imzml.parser import ImzMLParser
+from pims_plugin_format_msi.utils.imzml.utils import get_imzml_pair
 
 
 class NotImplementedClass:
@@ -90,3 +91,8 @@ class ImzMLFormat(AbstractFormat):
         Decision can be made based on the format metadata.
         """
         return True
+
+    @cached_property
+    def main_path(self):
+        imzml, _ = get_imzml_pair(self.path)
+        return imzml
