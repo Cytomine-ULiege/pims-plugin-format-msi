@@ -89,7 +89,7 @@ class ImzMLParser(AbstractParser):
         metadata.n_channels_per_read = metadata.n_channels
         metadata.n_distinct_channels = metadata.n_channels
         
-        metadata.pixel_type = np.dtype(parser.intensityPrecision)
+        metadata.pixel_type = np.dtype('uint16')  # np.dtype(parser.intensityPrecision)
         metadata.significant_bits = metadata.pixel_type.itemsize
         
         for channel in range(metadata.n_channels):
