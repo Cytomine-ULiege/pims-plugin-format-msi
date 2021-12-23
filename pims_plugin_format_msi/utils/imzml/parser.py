@@ -109,6 +109,18 @@ class ImzMLParser(AbstractParser):
         metadata = self.format.main_imd
 
         # TODO find documentation on which metadata can be used
+        # fill m/Z into the destination group
+        imz_path, ibd = get_imzml_pair(self.format.path)
+        with open(str(ibd), mode='rb') as ibd_file:
+            parser = pyimzml.ImzMLParser.ImzMLParser(
+                filename=str(imz_path),
+                parse_lib='lxml',
+                ibd_file=ibd_file  # the ibd file has to be opened manually
+            )
+            parser.m.seek(parser.mzOffsets[0])
+            mzs = np.fromfile(parser.m, count=parser.mzLengths[0], dtype=parser.mzPrecision)
+            for channel in range(metadata.n_channels):
+                metadata.channels[channel].suggested_name = f"{mzs[channel]:.5f}"
 
         metadata.is_complete = True
 
