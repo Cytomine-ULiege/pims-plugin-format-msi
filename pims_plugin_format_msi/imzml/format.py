@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from pims.cache import cached_property
+from pims.cache.object import cached_property
 from pims.formats import AbstractFormat
 from pims_plugin_format_msi.imzml.checker import ImzMLChecker
 from pims_plugin_format_msi.imzml.convertor import ImzMLToZarrConvertor
