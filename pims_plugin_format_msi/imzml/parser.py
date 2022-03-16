@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import warnings
-import numpy as np
 
+import numpy as np
 import pyimzml.ImzMLParser
+
 from pims.formats.utils.abstract import AbstractFormat
 from pims.formats.utils.parser import AbstractParser
 from pims.formats.utils.structures.metadata import ImageChannel, ImageMetadata, MetadataStore
-
 
 _REMOVE_WARNINGS = False
 
@@ -50,8 +50,8 @@ class ImzMLParser(AbstractParser):
         * height
         * depth
         * duration
-        * n_channels
-        * n_channels_per_read
+        * n_concrete_channels
+        * n_samples
         * n_distinct_channels
         * pixel_type
         * significant_bits
@@ -80,10 +80,10 @@ class ImzMLParser(AbstractParser):
         metadata.duration = 1
 
         if is_continuous:
-            metadata.n_channels = parser.mzLengths[0]
+            metadata.n_concrete_channels = parser.mzLengths[0]
         else:
-            metadata.n_channels = max(parser.mzLengths)
-        metadata.n_channels_per_read = metadata.n_channels
+            metadata.n_concrete_channels = max(parser.mzLengths)
+        metadata.n_samples = 1
         metadata.n_distinct_channels = metadata.n_channels
         
         metadata.pixel_type = np.dtype(parser.intensityPrecision)
